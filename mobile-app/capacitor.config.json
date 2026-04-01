@@ -1,0 +1,5 @@
+{
+  "appId": "com.verceldashboard.app",
+  "appName": "VercelDashboard",
+  "webDir": "dist"
+}
