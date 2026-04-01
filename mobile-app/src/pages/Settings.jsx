@@ -1,9 +1,11 @@
+import { useRef } from 'react';
 import { useProjectsStorage } from '../hooks/useProjectsStorage';
 import { useNavigate } from 'react-router-dom';
 
 export default function Settings() {
   const { clearProjects, projects } = useProjectsStorage();
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   const handleClearData = () => {
     if (window.confirm("Are you sure you want to delete all project data? This action cannot be undone.")) {
@@ -11,6 +13,40 @@ export default function Settings() {
       alert("All data cleared.");
       navigate('/');
     }
+  };
+
+  const handleExport = () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(projects, null, 2));
+    const dlAnchorElem = document.createElement('a');
+    dlAnchorElem.setAttribute("href", dataStr);
+    dlAnchorElem.setAttribute("download", "vercel_dashboard_backup.json");
+    dlAnchorElem.click();
+  };
+
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleImport = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const json = JSON.parse(e.target.result);
+        if (Array.isArray(json)) {
+          window.localStorage.setItem('vercel_dashboard_projects', JSON.stringify(json));
+          alert('Backup imported successfully! App will reload.');
+          window.location.reload();
+        } else {
+          alert('Invalid backup file format.');
+        }
+      } catch (err) {
+        alert('Failed to parse backup file.');
+      }
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -27,6 +63,18 @@ export default function Settings() {
              This application stores all your data directly on your device. Clearing data will permanently remove all {projects.length} project(s) saved.
           </p>
         </div>
+
+        <div className="grid grid-cols-2 gap-3 mb-2">
+           <button onClick={handleExport} className="w-full bg-surface-container-highest text-on-surface hover:bg-surface-variant transition-colors py-3 rounded-lg font-bold font-label text-[11px] uppercase flex flex-col items-center justify-center gap-1 shadow-sm">
+             <span className="material-symbols-outlined text-[18px]">download</span>
+             Export Backup
+           </button>
+           <button onClick={handleImportClick} className="w-full bg-surface-container-highest text-on-surface hover:bg-surface-variant transition-colors py-3 rounded-lg font-bold font-label text-[11px] uppercase flex flex-col items-center justify-center gap-1 shadow-sm">
+             <span className="material-symbols-outlined text-[18px]">upload</span>
+             Import Backup
+           </button>
+           <input type="file" ref={fileInputRef} onChange={handleImport} accept=".json" className="hidden" />
+        </div>
         
         <button onClick={handleClearData} className="w-full bg-error-container text-on-error-container hover:bg-red-200 transition-colors py-3 rounded-lg font-bold font-label text-sm uppercase flex items-center justify-center gap-2">
            <span className="material-symbols-outlined text-[18px]">delete_forever</span>
@@ -38,7 +86,7 @@ export default function Settings() {
          <div>
           <h3 className="font-headline font-bold text-lg text-on-surface">About</h3>
           <p className="text-sm text-on-surface-variant mt-2 line-clamp-2">
-             Vercel Dashboard App <br /> Version 1.0.0
+             Vercel Dashboard App <br /> Version 1.1.0
           </p>
         </div>
       </section>

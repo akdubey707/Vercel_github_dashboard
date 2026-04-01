@@ -41,7 +41,16 @@ export default function AddProject() {
       alert("Project Name is required.");
       return;
     }
-    addProject(formData);
+    
+    let finalData = { ...formData };
+    if (!finalData.image && (finalData.vercelUrl || finalData.localUrl || finalData.githubUrl)) {
+      const targetUrl = finalData.vercelUrl || finalData.localUrl || finalData.githubUrl;
+      if (targetUrl.startsWith('http')) {
+         finalData.image = `https://image.thum.io/get/width/600/crop/400/${targetUrl}`;
+      }
+    }
+
+    addProject(finalData);
     navigate('/');
   };
 

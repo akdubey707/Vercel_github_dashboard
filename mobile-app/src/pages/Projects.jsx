@@ -1,12 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useProjectsStorage } from '../hooks/useProjectsStorage';
 
 export default function Projects() {
   const { projects } = useProjectsStorage();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('q')?.toLowerCase() || '';
 
-  const activeCount = projects.filter(p => p.status === 'Active').length;
-  const archivedCount = projects.filter(p => p.status === 'Archived').length;
-  const totalDeployed = projects.length;
+  const filteredProjects = projects.filter(p => 
+      p.name.toLowerCase().includes(query) || 
+      (p.description || '').toLowerCase().includes(query)
+  );
+
+  const activeCount = filteredProjects.filter(p => p.status === 'Active').length;
+  const archivedCount = filteredProjects.filter(p => p.status === 'Archived').length;
+  const totalDeployed = filteredProjects.length;
 
   return (
     <>
@@ -35,15 +42,15 @@ export default function Projects() {
         </div>
       </div>
 
-      {projects.length === 0 ? (
+      {filteredProjects.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 px-6 text-center bg-white/50 border-2 border-dashed border-slate-200 rounded-xl">
           <span className="material-symbols-outlined text-4xl text-slate-300 mb-4">folder_open</span>
-          <h3 className="text-slate-900 font-bold mb-1">No projects yet</h3>
-          <p className="text-slate-500 text-sm max-w-[200px] mx-auto">Add your first project to get started with monitoring and deployments.</p>
+          <h3 className="text-slate-900 font-bold mb-1">No projects found</h3>
+          <p className="text-slate-500 text-sm max-w-[200px] mx-auto">Try a different search term or add a new project.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4">
-          {projects.map(project => (
+          {filteredProjects.map(project => (
             <Link key={project.id} to={`/project/${project.id}`} className="bg-surface-container-low p-5 rounded-xl block border border-transparent hover:border-outline-variant/30 transition-all cursor-pointer relative top-0 hover:-top-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
               <div className="flex justify-between items-start mb-3">
                 <div className="flex gap-3 items-center">

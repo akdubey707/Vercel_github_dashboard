@@ -29,7 +29,17 @@ export default function ProjectDetails() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    updateProject(id, editData);
+    let finalData = { ...editData };
+    
+    // Auto fetch screenshot on save if missing
+    if (!finalData.image && (finalData.vercelUrl || finalData.localUrl || finalData.githubUrl)) {
+      const targetUrl = finalData.vercelUrl || finalData.localUrl || finalData.githubUrl;
+      if (targetUrl.startsWith('http')) {
+         finalData.image = `https://image.thum.io/get/width/600/crop/400/${targetUrl}`;
+      }
+    }
+
+    updateProject(id, finalData);
     setIsEditing(false);
   };
 
