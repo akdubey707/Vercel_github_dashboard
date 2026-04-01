@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#565e74",
+                        "secondary-fixed": "#d3e4fe",
+                        "tertiary-fixed": "#89f5e7",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-dim": "#d8dadc",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed": "#0b1c30",
+                        "outline-variant": "#c6c6cd",
+                        "surface-variant": "#e0e3e5",
+                        "outline": "#76777d",
+                        "primary-fixed-dim": "#bec6e0",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#00201d",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "primary-fixed": "#dae2fd",
+                        "surface-container-low": "#f2f4f6",
+                        "primary": "#000000",
+                        "on-secondary-container": "#54647a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "on-surface-variant": "#45464d",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#00201d",
+                        "error": "#ba1a1a",
+                        "on-background": "#191c1e",
+                        "on-primary-container": "#7c839b",
+                        "primary-container": "#131b2e",
+                        "surface": "#f7f9fb",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-tertiary-container": "#0c9488",
+                        "inverse-primary": "#bec6e0",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-container": "#d0e1fb",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-slate-50 dark:bg-slate-950">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<button class="hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors p-1 rounded-full scale-90 active:scale-85 transition-transform">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-50">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-50 text-xl" data-icon="architecture">architecture</span>
+<h1 class="font-manrope font-extrabold text-xl tracking-tighter text-slate-900 dark:text-slate-50">Vercel Dashboard</h1>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-200/50 p-2 rounded-full transition-colors" data-icon="search">search</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-32 px-6 max-w-xl mx-auto space-y-6">
+<!-- Project Context Header -->
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Project Details</span>
+</div>
+<!-- Project Hero Image -->
+<section class="relative group">
+<div class="aspect-[21/9] w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist website interface displayed on a sleek laptop screen with soft architectural lighting and shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo_rIuFZ65HMK9DVIxIrVVAOtFvYoicRTytf1EVxFq9pawZLYhb2hOD2TEYC7Y3jR30uDd3qSx64fvcutJVLBWZXibgCkJy3rVl7QibgEEINUJApOqXEp_TZ_ZSd95vWsBZ7cFwQYcaEoeHG_Pxo1P29ezX0EqzuKY0BYH3TQ3DLs618BYbtnp87H723HQdV9NYHytOaIoEPeaGPXaJ87GIrsuPRctVrStZwlA3VUyIjkxu1SRfkoJ5Ph5SuKdwtbLFwF9vMjFfyq7"/>
+</div>
+</section>
+<!-- Project Identity Section -->
+<section class="space-y-3">
+<div class="space-y-0.5">
+<p class="font-label text-[10px] font-bold uppercase tracking-[0.1em] text-on-primary-container">Project Category</p>
+<h2 class="font-manrope font-extrabold text-2xl tracking-tight text-on-surface">Project Name</h2>
+</div>
+<div class="flex flex-wrap gap-1.5"><span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-medium text-on-surface-variant">Framework</span><span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-medium text-on-surface-variant">Language</span><span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-medium text-on-surface-variant">Database</span></div>
+</section>
+<!-- Description Section -->
+<section class="space-y-3">
+<div class="h-1 w-10 bg-on-tertiary-container/30 rounded-full"></div>
+<p class="font-body text-on-surface-variant leading-relaxed text-sm">No project description provided. Click the edit icon to add details about your architecture, technology stack, and project goals.</p>
+</section>
+<!-- Action Buttons -->
+<section class="grid grid-cols-1 gap-3">
+<button class="flex items-center justify-center gap-2 w-full py-3 bg-primary text-on-primary rounded-xl font-manrope font-bold text-sm tracking-tight active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-lg">rocket_launch</span>
+            Open Vercel App
+        </button>
+<button class="flex items-center justify-center gap-2 w-full py-3 bg-surface-container-lowest text-on-surface-variant rounded-xl font-manrope font-bold text-sm tracking-tight border border-outline-variant/15 hover:bg-surface-container-high active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-lg">code</span>
+            View on GitHub
+        </button>
+</section>
+<!-- Threaded Activity Feed -->
+<section class="space-y-4 pt-2">
+<h3 class="font-manrope font-bold text-base text-on-surface">Recent Deployments</h3>
+<div class="relative pl-6 space-y-4"><div class="bg-surface-container-low p-4 rounded-xl border border-dashed border-outline-variant/30 flex flex-col items-center justify-center text-center space-y-2"><span class="material-symbols-outlined text-outline-variant text-3xl">history</span><p class="text-xs text-on-surface-variant font-medium">No deployments found</p><p class="text-[10px] text-on-surface-variant/70">Connect your repository to see deployment history here.</p></div></div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-t border-slate-200/15 dark:border-slate-800/15 shadow-[0_-4px_24px_rgba(0,0,0,0.04)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-50 rounded-xl px-4 py-2 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-[0.05em]">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-slate-600 dark:hover:text-slate-300 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1">add_box</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-[0.05em]">Add New</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-slate-600 dark:hover:text-slate-300 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-[0.05em]">Settings</span>
+</a>
+</nav>
+</body></html>

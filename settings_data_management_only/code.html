@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Vercel Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "tertiary-container": "#00201d",
+                        "on-tertiary-container": "#0c9488",
+                        "on-background": "#191c1e",
+                        "primary-fixed": "#dae2fd",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-fixed": "#00201d",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-error": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-primary": "#bec6e0",
+                        "secondary": "#505f76",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#565e74",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-primary-container": "#7c839b",
+                        "background": "#f7f9fb",
+                        "on-secondary-container": "#54647a",
+                        "secondary-container": "#d0e1fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "on-surface": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c6c6cd",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "tertiary-fixed": "#89f5e7",
+                        "inverse-on-surface": "#eff1f3",
+                        "outline": "#76777d",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface": "#f7f9fb",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<header class="bg-slate-50 dark:bg-slate-950 sticky top-0 z-50 border-b border-outline-variant/10">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-50" data-icon="architecture">architecture</span>
+<span class="font-manrope font-extrabold text-xl tracking-tighter text-slate-900 dark:text-slate-50">Vercel Dashboard</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 dark:text-slate-400 font-bold text-sm hover:text-slate-900 transition-colors" href="#">Projects</a>
+<a class="text-slate-500 dark:text-slate-400 font-bold text-sm hover:text-slate-900 transition-colors" href="#">Add New</a>
+<a class="text-slate-900 dark:text-slate-50 font-bold text-sm" href="#">Settings</a>
+</div>
+<button class="md:hidden text-slate-900">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 pt-12">
+<header class="mb-12">
+<h1 class="text-display-lg text-4xl font-extrabold tracking-tight mb-2">Settings</h1>
+<p class="text-on-surface-variant font-medium">Manage your workspace data and environment state.</p>
+</header>
+<div class="space-y-12">
+<section>
+<h3 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6 flex items-center gap-4">
+                    Data Management
+                    <div class="h-[1px] flex-grow bg-outline-variant opacity-20"></div>
+</h3>
+<div class="grid grid-cols-1 gap-6">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm group hover:shadow-md transition-shadow border border-outline-variant/10">
+<div class="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">cloud_upload</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Backup System</h4>
+<div class="flex items-center gap-2 mb-3 text-[10px] font-bold uppercase tracking-widest text-slate-400"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>No recent backups</div><p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Schedule automatic snapshots of your environment variables and deployment configurations.</p>
+<button class="px-8 py-3 bg-primary text-on-primary rounded-lg text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity">
+                            Create Backup
+                        </button>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm group hover:shadow-md transition-shadow border border-outline-variant/10">
+<div class="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-tertiary-container">settings_backup_restore</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Restore Instance</h4>
+<div class="flex items-center gap-2 mb-3 text-[10px] font-bold uppercase tracking-widest text-slate-400"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>No recent activity</div><p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Roll back your entire architecture to a previous known state from your backup history.</p>
+<button class="px-8 py-3 border border-outline-variant text-primary rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-colors">
+                            Browse History
+                        </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-t border-slate-200/15 dark:border-slate-800/15 shadow-[0_-4px_24px_rgba(0,0,0,0.04)] md:hidden">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-6 py-2 transition-all duration-300 ease-in-out hover:text-slate-600" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="grid_view">grid_view</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-[0.05em]">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-6 py-2 transition-all duration-300 ease-in-out hover:text-slate-600" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="add_box">add_box</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-[0.05em]">Add New</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-50 rounded-xl px-6 py-2 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-[0.05em]">Settings</span>
+</a>
+</nav>
+</body></html>
