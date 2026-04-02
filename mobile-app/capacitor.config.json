@@ -1,5 +1,5 @@
 {
-  "appId": "com.verceldashboard.app",
-  "appName": "VercelDashboard",
+  "appId": "com.vimchidashboard.app",
+  "appName": "VimchiDashboard",
   "webDir": "dist"
 }

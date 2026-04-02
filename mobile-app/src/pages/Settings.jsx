@@ -1,10 +1,12 @@
 import { useRef } from 'react';
 import { useProjectsStorage } from '../hooks/useProjectsStorage';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
 
 export default function Settings() {
   const { clearProjects, projects } = useProjectsStorage();
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
   const fileInputRef = useRef(null);
 
   const handleClearData = () => {
@@ -19,7 +21,7 @@ export default function Settings() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(projects, null, 2));
     const dlAnchorElem = document.createElement('a');
     dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", "vercel_dashboard_backup.json");
+    dlAnchorElem.setAttribute("download", "vimchi_dashboard_backup.json");
     dlAnchorElem.click();
   };
 
@@ -36,7 +38,7 @@ export default function Settings() {
       try {
         const json = JSON.parse(e.target.result);
         if (Array.isArray(json)) {
-          window.localStorage.setItem('vercel_dashboard_projects', JSON.stringify(json));
+          window.localStorage.setItem('vimchi_dashboard_projects', JSON.stringify(json));
           alert('Backup imported successfully! App will reload.');
           window.location.reload();
         } else {
@@ -82,11 +84,21 @@ export default function Settings() {
         </button>
       </section>
       
-      <section className="bg-surface-container-low rounded-xl p-6 border border-slate-200/50 mt-4 space-y-4">
-         <div>
+      <section className="bg-surface-container-low rounded-xl p-6 border border-slate-200/50 dark:border-slate-800/50 mt-4 space-y-4">
+        <div className="flex justify-between items-center bg-surface-container-highest p-4 rounded-lg cursor-pointer shadow-sm mb-4" onClick={toggleTheme}>
+           <div>
+             <h3 className="font-headline font-bold text-sm text-on-surface">Dark Mode</h3>
+             <p className="text-xs text-on-surface-variant mt-0.5 max-w-[200px]">Toggle dark UI theme</p>
+           </div>
+           <div className={`w-12 h-6 rounded-full flex items-center p-1 transition-colors ${theme === 'dark' ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-700'}`}>
+              <div className={`w-4 h-4 rounded-full shadow-sm bg-white transition-transform ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0'}`}></div>
+           </div>
+        </div>
+
+         <div className="pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
           <h3 className="font-headline font-bold text-lg text-on-surface">About</h3>
           <p className="text-sm text-on-surface-variant mt-2 line-clamp-2">
-             Vercel Dashboard App <br /> Version 1.1.0
+             Vimchi Dashboard App <br /> Version 1.2
           </p>
         </div>
       </section>

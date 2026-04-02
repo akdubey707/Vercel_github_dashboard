@@ -55,7 +55,7 @@ export default function Projects() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-headline font-bold text-on-surface text-lg leading-tight truncate">{project.name}</h3>
-                    <p className="font-body text-xs text-on-surface-variant truncate mt-1">{project.vercelUrl || project.localUrl || 'No URL specified'}</p>
+                    <p className="font-body text-xs text-on-surface-variant truncate mt-1">{project.vimchiUrl || project.localUrl || 'No URL specified'}</p>
                   </div>
                 </div>
                 <div className="bg-surface-container-lowest border border-outline-variant/30 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full text-on-surface flex items-center gap-1.5 shrink-0 mt-1">

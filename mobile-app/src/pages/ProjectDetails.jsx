@@ -32,8 +32,8 @@ export default function ProjectDetails() {
     let finalData = { ...editData };
     
     // Auto fetch screenshot on save if missing
-    if (!finalData.image && (finalData.vercelUrl || finalData.localUrl || finalData.githubUrl)) {
-      const targetUrl = finalData.vercelUrl || finalData.localUrl || finalData.githubUrl;
+    if (!finalData.image && (finalData.vimchiUrl || finalData.localUrl || finalData.githubUrl)) {
+      const targetUrl = finalData.vimchiUrl || finalData.localUrl || finalData.githubUrl;
       if (targetUrl.startsWith('http')) {
          finalData.image = `https://image.thum.io/get/width/600/crop/400/${targetUrl}`;
       }
@@ -60,6 +60,17 @@ export default function ProjectDetails() {
         setEditData(prev => ({ ...prev, image: reader.result }));
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleHtmlUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setEditData(prev => ({ ...prev, htmlContent: e.target.result }));
+      };
+      reader.readAsText(file);
     }
   };
 
@@ -116,21 +127,21 @@ export default function ProjectDetails() {
             <p className="font-body text-on-surface-variant leading-relaxed text-sm">
               {project.description || "No project description provided. Click the edit button to add details about your architecture, technology stack, and project goals."}
             </p>
-            {(project.vercelUrl || project.localUrl || project.githubUrl) && (
+            {(project.vimchiUrl || project.localUrl || project.githubUrl) && (
               <div className="bg-surface-container-highest/50 px-4 py-3 rounded-[16px] border border-outline-variant/30 mt-4 flex flex-col gap-1 shadow-sm">
                  <span className="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Primary URL</span>
                  <p className="font-mono text-xs text-primary truncate selectable">
-                   {project.vercelUrl || project.localUrl || project.githubUrl}
+                   {project.vimchiUrl || project.localUrl || project.githubUrl}
                  </p>
               </div>
             )}
           </section>
 
           <section className="grid grid-cols-1 gap-3 pt-4 border-t border-surface-container-highest/50">
-            {project.vercelUrl && (
-              <a href={project.vercelUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-primary text-on-primary rounded-[18px] font-headline font-bold text-sm tracking-tight active:scale-[0.98] transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1)]">
+            {project.vimchiUrl && (
+              <a href={project.vimchiUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-primary text-on-primary rounded-[18px] font-headline font-bold text-sm tracking-tight active:scale-[0.98] transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1)]">
                   <span className="material-symbols-outlined text-lg">rocket_launch</span>
-                  Open Vercel App
+                  Open Vimchi App
               </a>
             )}
             
@@ -174,9 +185,38 @@ export default function ProjectDetails() {
               )}
             </label>
           </div>
+          
+          {editData.isLocalHtml && (
+             <div className="space-y-4 pt-2">
+               <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Update HTML File</label>
+               <label className={`group relative w-full pt-8 pb-8 rounded-xl border-2 border-dashed flex flex-col items-center cursor-pointer justify-center gap-3 transition-all overflow-hidden ${editData.htmlContent ? 'border-primary/50 bg-primary/5' : 'bg-surface-container-highest border-outline-variant/40 hover:bg-surface-container-high'}`}>
+                 <input type="file" accept=".html,.htm" onChange={handleHtmlUpload} className="hidden" />
+                 {editData.htmlContent ? (
+                    <>
+                       <div className="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center shadow-sm">
+                          <span className="material-symbols-outlined text-sm">check</span>
+                       </div>
+                       <div className="text-center">
+                         <p className="font-body text-xs font-bold text-on-surface text-primary">HTML Content Edited!</p>
+                         <p className="font-body text-[10px] text-on-surface-variant mt-1">Tap to replace</p>
+                       </div>
+                    </>
+                 ) : (
+                    <>
+                       <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm font-bold text-[8px] tracking-widest uppercase">
+                          HTML
+                       </div>
+                       <div className="text-center">
+                         <p className="font-body text-xs font-bold text-on-surface">Upload HTML File</p>
+                       </div>
+                    </>
+                 )}
+               </label>
+             </div>
+          )}
           <div className="space-y-2">
-            <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Vercel URL</label>
-            <input name="vercelUrl" value={editData.vercelUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all border-none" type="url" />
+            <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Vimchi URL</label>
+            <input name="vimchiUrl" value={editData.vimchiUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all border-none" type="url" />
           </div>
           <div className="space-y-2">
             <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">GitHub URL</label>

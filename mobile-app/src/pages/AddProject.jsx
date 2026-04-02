@@ -8,7 +8,7 @@ export default function AddProject() {
 
   const [formData, setFormData] = useState({
     name: '',
-    vercelUrl: '',
+    vimchiUrl: '',
     githubUrl: '',
     localUrl: '',
     description: '',
@@ -43,8 +43,8 @@ export default function AddProject() {
     }
     
     let finalData = { ...formData };
-    if (!finalData.image && (finalData.vercelUrl || finalData.localUrl || finalData.githubUrl)) {
-      const targetUrl = finalData.vercelUrl || finalData.localUrl || finalData.githubUrl;
+    if (!finalData.image && (finalData.vimchiUrl || finalData.localUrl || finalData.githubUrl)) {
+      const targetUrl = finalData.vimchiUrl || finalData.localUrl || finalData.githubUrl;
       if (targetUrl.startsWith('http')) {
          finalData.image = `https://image.thum.io/get/width/600/crop/400/${targetUrl}`;
       }
@@ -78,16 +78,16 @@ export default function AddProject() {
           </div>
         </div>
 
-        {/* Vercel App URL */}
+        {/* Vimchi App URL */}
         <div className="space-y-2">
-          <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Vercel App URL</label>
+          <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Vimchi App URL</label>
           <div className="focus-bar-input bg-surface-container-highest rounded-[16px] transition-all duration-200">
             <input 
-              name="vercelUrl"
-              value={formData.vercelUrl}
+              name="vimchiUrl"
+              value={formData.vimchiUrl}
               onChange={handleChange}
               className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-slate-800 dark:text-slate-200 font-medium font-body placeholder:text-outline/50" 
-              placeholder="https://project-name.vercel.app" 
+              placeholder="https://project-name.vimchi.app" 
               type="url" 
             />
           </div>

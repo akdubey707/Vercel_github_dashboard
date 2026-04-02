@@ -1,11 +1,29 @@
 import { useState, useEffect } from 'react';
 
-const STORAGE_KEY = 'vercel_dashboard_projects';
+const STORAGE_KEY = 'vimchi_dashboard_projects';
 
 export function useProjectsStorage() {
   const [projects, setProjects] = useState(() => {
     try {
-      const item = window.localStorage.getItem(STORAGE_KEY);
+      let item = window.localStorage.getItem(STORAGE_KEY);
+      
+      // Automatic data migration from old vercel storage
+      if (!item) {
+         const oldItem = window.localStorage.getItem('vercel_dashboard_projects');
+         if (oldItem) {
+            const parsed = JSON.parse(oldItem);
+            const migrated = parsed.map(p => {
+               if (p.vercelUrl) {
+                   p.vimchiUrl = p.vercelUrl;
+                   delete p.vercelUrl;
+               }
+               return p;
+            });
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+            return migrated;
+         }
+      }
+      
       return item ? JSON.parse(item) : [];
     } catch (error) {
       console.error('Error reading localStorage', error);

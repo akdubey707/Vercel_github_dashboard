@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">VercelDashboard</string>
-    <string name="title_activity_main">VercelDashboard</string>
-    <string name="package_name">com.verceldashboard.app</string>
-    <string name="custom_url_scheme">com.verceldashboard.app</string>
+    <string name="app_name">VimchiDashboard</string>
+    <string name="title_activity_main">VimchiDashboard</string>
+    <string name="package_name">com.vimchidashboard.app</string>
+    <string name="custom_url_scheme">com.vimchidashboard.app</string>
 </resources>

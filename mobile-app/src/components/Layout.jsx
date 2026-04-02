@@ -13,6 +13,9 @@ export default function Layout() {
   const [touchEndY, setTouchEndY] = useState(null);
 
   useEffect(() => {
+    // Reset scroll position when navigating between routes
+    window.scrollTo(0, 0);
+
     // Listen for the hardware back button on Android
     const initBackButton = async () => {
       await CapacitorApp.addListener('backButton', ({ canGoBack }) => {
@@ -33,7 +36,7 @@ export default function Layout() {
   }, [navigate, location]);
 
   const minSwipeDistance = 50;
-  const routes = ['/', '/add', '/settings'];
+  const routes = ['/', '/add', '/html', '/settings'];
 
   const onTouchStart = (e) => {
     setTouchEndX(null);
@@ -109,7 +112,7 @@ export default function Layout() {
   };
 
   return (
-    <div className="bg-surface font-body text-on-surface min-h-screen relative overflow-hidden">
+    <div className="bg-surface dark:bg-slate-950 font-body text-on-surface dark:text-slate-50 min-h-screen relative overflow-hidden">
       {/* TopAppBar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-50 dark:bg-slate-950">
         <div className="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
@@ -117,7 +120,7 @@ export default function Layout() {
             <>
               <div className="flex items-center gap-3 animate-fade-in">
                 <span className="material-symbols-outlined text-slate-900 dark:text-slate-50">architecture</span>
-                <h1 className="font-headline font-extrabold text-xl tracking-tighter text-slate-900 dark:text-slate-50">Vercel Dashboard</h1>
+                <h1 className="font-headline font-extrabold text-xl tracking-tighter text-slate-900 dark:text-slate-50">Vimchi Dashboard</h1>
               </div>
               <div className="flex items-center gap-4">
                 {location.pathname === '/' && (
@@ -167,6 +170,12 @@ export default function Layout() {
         <Link to="/add" className={getNavClass('/add')}>
           <span className="material-symbols-outlined mb-0.5" style={getIconContainerClass('/add')}>add_box</span>
           <span className="font-label text-[10px] font-bold tracking-wide whitespace-nowrap">Add New</span>
+        </Link>
+        
+        {/* HTML */}
+        <Link to="/html" className={getNavClass('/html')}>
+          <span className="material-symbols-outlined mb-0.5" style={getIconContainerClass('/html')}>code</span>
+          <span className="font-label text-[10px] font-bold tracking-wide whitespace-nowrap">HTML</span>
         </Link>
 
         {/* Settings */}
