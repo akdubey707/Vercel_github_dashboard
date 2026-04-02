@@ -48,6 +48,21 @@ export default function ProjectDetails() {
     setEditData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        alert("File size exceeds 10MB limit.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditData(prev => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="space-y-6 pt-2">
       <div className="flex justify-between items-center">
@@ -75,11 +90,11 @@ export default function ProjectDetails() {
 
           <section className="relative group">
             {project.image ? (
-              <div className="aspect-[21/9] w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low border border-slate-200/50">
+              <div className="aspect-[21/9] w-full rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-surface-container-low border border-slate-200/40 dark:border-slate-700/40">
                 <img className="w-full h-full object-cover" src={project.image} alt={project.name}/>
               </div>
             ) : (
-              <div className="aspect-[21/9] w-full flex items-center justify-center rounded-xl bg-surface-container-low border-2 border-dashed border-outline-variant/30 text-on-surface-variant">
+              <div className="aspect-[21/9] w-full flex items-center justify-center rounded-[24px] bg-surface-container-low border-2 border-dashed border-outline-variant/30 text-on-surface-variant">
                  <span className="material-symbols-outlined text-4xl">inventory_2</span>
               </div>
             )}
@@ -101,25 +116,33 @@ export default function ProjectDetails() {
             <p className="font-body text-on-surface-variant leading-relaxed text-sm">
               {project.description || "No project description provided. Click the edit button to add details about your architecture, technology stack, and project goals."}
             </p>
+            {(project.vercelUrl || project.localUrl || project.githubUrl) && (
+              <div className="bg-surface-container-highest/50 px-4 py-3 rounded-[16px] border border-outline-variant/30 mt-4 flex flex-col gap-1 shadow-sm">
+                 <span className="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Primary URL</span>
+                 <p className="font-mono text-xs text-primary truncate selectable">
+                   {project.vercelUrl || project.localUrl || project.githubUrl}
+                 </p>
+              </div>
+            )}
           </section>
 
-          <section className="grid grid-cols-1 gap-3 pt-4 border-t border-surface-container-highest">
+          <section className="grid grid-cols-1 gap-3 pt-4 border-t border-surface-container-highest/50">
             {project.vercelUrl && (
-              <a href={project.vercelUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-on-primary rounded-xl font-headline font-bold text-sm tracking-tight active:scale-[0.98] transition-all">
+              <a href={project.vercelUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-primary text-on-primary rounded-[18px] font-headline font-bold text-sm tracking-tight active:scale-[0.98] transition-all shadow-[0_4px_14px_rgba(0,0,0,0.1)]">
                   <span className="material-symbols-outlined text-lg">rocket_launch</span>
                   Open Vercel App
               </a>
             )}
             
             {project.githubUrl && (
-              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-surface-container-lowest text-on-surface-variant rounded-xl font-headline font-bold text-sm tracking-tight border border-outline-variant/15 hover:bg-surface-container-high active:scale-[0.98] transition-all">
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-black text-white rounded-[18px] font-headline font-bold text-sm tracking-tight border border-outline-variant/20 hover:bg-slate-900 active:scale-[0.98] transition-all shadow-sm">
                   <span className="material-symbols-outlined text-lg">code</span>
                   View on GitHub
               </a>
             )}
 
             {project.localUrl && (
-              <a href={project.localUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-surface-container-lowest text-on-surface-variant rounded-xl font-headline font-bold text-sm tracking-tight border border-outline-variant/15 hover:bg-surface-container-high active:scale-[0.98] transition-all shadow-sm">
+              <a href={project.localUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100 rounded-[18px] font-headline font-bold text-sm tracking-tight border border-outline-variant/20 hover:bg-blue-200 dark:hover:bg-blue-800 active:scale-[0.98] transition-all shadow-sm">
                   <span className="material-symbols-outlined text-lg">computer</span>
                   Open Local Environment
               </a>
@@ -127,35 +150,54 @@ export default function ProjectDetails() {
           </section>
         </>
       ) : (
-        <form onSubmit={handleUpdate} className="space-y-6 pt-4 bg-white/50 p-6 rounded-xl border border-slate-200 relative -mx-2">
+        <form onSubmit={handleUpdate} className="space-y-5 pt-4 bg-white/60 dark:bg-slate-900/40 p-6 rounded-[24px] border border-slate-200/60 dark:border-slate-800/60 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative -mx-2 backdrop-blur-md">
           <div className="space-y-2">
             <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Project Name</label>
-            <input name="name" value={editData.name} onChange={handleChange} className="w-full bg-surface-container-highest rounded px-3 py-2 text-sm text-on-surface" required />
+            <input name="name" value={editData.name} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all border-none" required />
+          </div>
+          <div className="space-y-4">
+            <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Visual Asset</label>
+            <label className="group relative w-full aspect-video rounded-xl bg-surface-container-highest flex flex-col items-center cursor-pointer justify-center gap-2 transition-all hover:bg-surface-container-high overflow-hidden shadow-sm">
+              <input type="file" accept="image/png, image/jpeg" onChange={handleImageUpload} className="hidden" />
+              
+              {editData.image ? (
+                  <img src={editData.image} alt="Preview" className="w-full h-full object-cover" />
+              ) : (
+                  <>
+                    <div className="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                      <span className="material-symbols-outlined text-on-surface-variant">image</span>
+                    </div>
+                    <div className="text-center">
+                      <p className="font-body text-xs font-semibold text-on-surface">Upload Image</p>
+                    </div>
+                  </>
+              )}
+            </label>
           </div>
           <div className="space-y-2">
             <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Vercel URL</label>
-            <input name="vercelUrl" value={editData.vercelUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded px-3 py-2 text-sm text-on-surface" type="url" />
+            <input name="vercelUrl" value={editData.vercelUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all border-none" type="url" />
           </div>
           <div className="space-y-2">
             <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">GitHub URL</label>
-            <input name="githubUrl" value={editData.githubUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded px-3 py-2 text-sm text-on-surface" type="url" />
+            <input name="githubUrl" value={editData.githubUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all border-none" type="url" />
           </div>
           <div className="space-y-2">
             <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Local URL</label>
-            <input name="localUrl" value={editData.localUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded px-3 py-2 text-sm text-on-surface" />
+            <input name="localUrl" value={editData.localUrl || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all border-none" />
           </div>
           <div className="space-y-2">
             <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Status</label>
-            <select name="status" value={editData.status} onChange={handleChange} className="w-full bg-surface-container-highest rounded px-3 py-2 text-sm text-on-surface">
+            <select name="status" value={editData.status} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 border-none transition-all">
                <option value="Active">Active</option>
                <option value="Archived">Archived</option>
             </select>
           </div>
           <div className="space-y-2">
             <label className="font-label text-xs font-bold uppercase text-on-surface-variant/80">Description</label>
-            <textarea name="description" value={editData.description || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded px-3 py-2 text-sm text-on-surface" rows="3"></textarea>
+            <textarea name="description" value={editData.description || ''} onChange={handleChange} className="w-full bg-surface-container-highest rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all border-none" rows="3"></textarea>
           </div>
-          <button type="submit" className="w-full bg-primary text-white py-3 rounded-xl font-bold font-headline tracking-tighter">Save Changes</button>
+          <button type="submit" className="w-full bg-primary text-white py-3.5 mt-2 rounded-full font-bold font-headline tracking-tighter shadow-[0_4px_14px_rgba(0,0,0,0.1)] active:scale-[0.98] transition-transform">Save Changes</button>
         </form>
       )}
     </div>

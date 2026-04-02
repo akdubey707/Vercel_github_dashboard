@@ -61,16 +61,16 @@ export default function AddProject() {
         <p className="text-on-surface-variant mt-2 font-body text-sm">Deploy a fresh architectural vision to the cloud.</p>
       </header>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-8">
         {/* Project Name */}
         <div className="space-y-2">
           <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Project Name</label>
-          <div className="focus-bar-input bg-surface-container-highest rounded-md transition-all duration-200">
+          <div className="focus-bar-input bg-surface-container-highest rounded-[16px] transition-all duration-200">
             <input 
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-on-surface font-body placeholder:text-outline/50" 
+              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-slate-800 dark:text-slate-200 font-medium font-body placeholder:text-outline/50" 
               placeholder="e.g. Modernist Pavilion" 
               type="text" 
               required
@@ -81,12 +81,12 @@ export default function AddProject() {
         {/* Vercel App URL */}
         <div className="space-y-2">
           <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Vercel App URL</label>
-          <div className="focus-bar-input bg-surface-container-highest rounded-md transition-all duration-200">
+          <div className="focus-bar-input bg-surface-container-highest rounded-[16px] transition-all duration-200">
             <input 
               name="vercelUrl"
               value={formData.vercelUrl}
               onChange={handleChange}
-              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-on-surface font-body placeholder:text-outline/50" 
+              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-slate-800 dark:text-slate-200 font-medium font-body placeholder:text-outline/50" 
               placeholder="https://project-name.vercel.app" 
               type="url" 
             />
@@ -96,12 +96,12 @@ export default function AddProject() {
         {/* GitHub URL */}
         <div className="space-y-2">
           <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">GitHub URL</label>
-          <div className="focus-bar-input bg-surface-container-highest rounded-md transition-all duration-200">
+          <div className="focus-bar-input bg-surface-container-highest rounded-[16px] transition-all duration-200">
             <input 
               name="githubUrl"
               value={formData.githubUrl}
               onChange={handleChange}
-              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-on-surface font-body placeholder:text-outline/50" 
+              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-slate-800 dark:text-slate-200 font-medium font-body placeholder:text-outline/50" 
               placeholder="https://github.com/studio/repo" 
               type="url" 
             />
@@ -111,12 +111,12 @@ export default function AddProject() {
         {/* Local Address / Custom URL */}
         <div className="space-y-2">
           <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Local Address / Custom URL</label>
-          <div className="focus-bar-input bg-surface-container-highest rounded-md transition-all duration-200">
+          <div className="focus-bar-input bg-surface-container-highest rounded-[16px] transition-all duration-200">
             <input 
               name="localUrl"
               value={formData.localUrl}
               onChange={handleChange}
-              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-on-surface font-body placeholder:text-outline/50" 
+              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-slate-800 dark:text-slate-200 font-medium font-body placeholder:text-outline/50" 
               placeholder="http://localhost:3000 or custom domain" 
               type="text" 
             />
@@ -126,12 +126,12 @@ export default function AddProject() {
         {/* Short Description */}
         <div className="space-y-2">
           <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Short Description</label>
-          <div className="focus-bar-input bg-surface-container-highest rounded-md transition-all duration-200">
+          <div className="focus-bar-input bg-surface-container-highest rounded-[16px] transition-all duration-200">
             <textarea 
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-on-surface font-body placeholder:text-outline/50 resize-none" 
+              className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 text-slate-800 dark:text-slate-200 font-medium font-body placeholder:text-outline/50 resize-none" 
               placeholder="Brief technical summary of the project architecture and goals..." 
               rows="4"
             ></textarea>
@@ -141,7 +141,7 @@ export default function AddProject() {
         {/* Upload Screenshot */}
         <div className="space-y-4">
           <label className="font-label text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Visual Asset</label>
-          <label className="group relative w-full aspect-video rounded-xl bg-surface-container-low border-2 border-dashed border-outline-variant/30 flex flex-col items-center cursor-pointer justify-center gap-3 transition-all hover:bg-surface-container hover:border-outline-variant/60 overflow-hidden">
+          <label className="group relative w-full aspect-video rounded-[24px] bg-surface-container-low border-2 border-dashed border-outline-variant/30 flex flex-col items-center cursor-pointer justify-center gap-3 transition-all hover:bg-surface-container hover:border-outline-variant/60 overflow-hidden shadow-sm">
             <input type="file" accept="image/png, image/jpeg" onChange={handleImageUpload} className="hidden" />
             
             {formData.image ? (
@@ -162,7 +162,7 @@ export default function AddProject() {
 
         {/* Save Project Button */}
         <div className="pt-6">
-          <button className="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-bold py-4 rounded-xl shadow-lg hover:shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2" type="submit">
+          <button className="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-bold py-4 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.1)] hover:shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2" type="submit">
             <span className="material-symbols-outlined text-lg">cloud_upload</span>
             Save Project
           </button>

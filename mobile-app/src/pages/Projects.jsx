@@ -1,6 +1,20 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { useProjectsStorage } from '../hooks/useProjectsStorage';
 
+const getBackgroundColor = (name) => {
+  if (!name) return 'bg-slate-500';
+  const colors = [
+    'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 
+    'bg-purple-500', 'bg-pink-500', 'bg-teal-500', 'bg-orange-500'
+  ];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % colors.length;
+  return colors[index];
+};
+
 export default function Projects() {
   const { projects } = useProjectsStorage();
   const [searchParams] = useSearchParams();
@@ -17,29 +31,11 @@ export default function Projects() {
 
   return (
     <>
-      <div className="mb-6">
-        <h2 className="font-headline font-extrabold text-2xl tracking-tight text-primary mb-2">My Projects</h2>
-        <div className="h-1 w-12 bg-on-tertiary-container rounded-full"></div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-3 mb-8">
-        {/* Total Deployed Tile */}
-        <div className="bg-white border border-slate-200 p-4 rounded flex flex-col gap-1 shadow-sm">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-headline">Total Deployed</span>
-          <div className="flex items-baseline gap-2"><span className="text-2xl font-extrabold text-[#0F172A] font-headline">{totalDeployed}</span></div>
-        </div>
-
-        {/* Active Tile */}
-        <div className="bg-white border border-slate-200 p-4 rounded flex flex-col gap-1 shadow-sm">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-headline">Active</span>
-          <div className="flex items-baseline gap-2"><span className="text-2xl font-extrabold text-[#0F172A] font-headline">{activeCount}</span></div>
-        </div>
-
-        {/* Archived Tile */}
-        <div className="bg-white border border-slate-200 p-4 rounded flex flex-col gap-1 shadow-sm">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-headline">Archived</span>
-          <div className="flex items-baseline gap-2"><span className="text-2xl font-extrabold text-[#0F172A] font-headline">{archivedCount}</span></div>
-        </div>
+      <div className="mb-6 flex items-center gap-3">
+        <h2 className="font-headline font-extrabold text-2xl tracking-tight text-slate-900 dark:text-slate-50">My Projects</h2>
+        <span className="bg-slate-200/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 font-bold text-xs px-2.5 py-1 rounded-md">
+          {totalDeployed}
+        </span>
       </div>
 
       {filteredProjects.length === 0 ? (
@@ -51,22 +47,18 @@ export default function Projects() {
       ) : (
         <div className="grid grid-cols-1 gap-4">
           {filteredProjects.map(project => (
-            <Link key={project.id} to={`/project/${project.id}`} className="bg-surface-container-low p-5 rounded-xl block border border-transparent hover:border-outline-variant/30 transition-all cursor-pointer relative top-0 hover:-top-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-              <div className="flex justify-between items-start mb-3">
-                <div className="flex gap-3 items-center">
-                  <div className="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center overflow-hidden shrink-0">
-                    {project.image ? (
-                        <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-                    ) : (
-                        <span className="material-symbols-outlined text-slate-400">deployed_code</span>
-                    )}
+            <Link key={project.id} to={`/project/${project.id}`} className="bg-surface-container-low p-4 rounded-[20px] block border border-slate-200/40 dark:border-slate-800/40 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-outline-variant/50 transition-all duration-200 ease-out cursor-pointer relative top-0 hover:-top-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] backdrop-blur-sm">
+              <div className="flex justify-between items-start mb-3 gap-3">
+                <div className="flex gap-3 items-center flex-1 min-w-0">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center overflow-hidden shrink-0 shadow-sm text-white font-headline font-bold text-lg ${getBackgroundColor(project.name)}`}>
+                    {project.name ? project.name.charAt(0).toUpperCase() : '?'}
                   </div>
-                  <div>
-                    <h3 className="font-headline font-bold text-on-surface text-lg leading-tight">{project.name}</h3>
-                    <p className="font-body text-xs text-on-surface-variant line-clamp-1 mt-1">{project.vercelUrl || project.localUrl || 'No URL specified'}</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-headline font-bold text-on-surface text-lg leading-tight truncate">{project.name}</h3>
+                    <p className="font-body text-xs text-on-surface-variant truncate mt-1">{project.vercelUrl || project.localUrl || 'No URL specified'}</p>
                   </div>
                 </div>
-                <div className="bg-surface-container-lowest border border-outline-variant/30 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full text-on-surface flex items-center gap-1.5">
+                <div className="bg-surface-container-lowest border border-outline-variant/30 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full text-on-surface flex items-center gap-1.5 shrink-0 mt-1">
                   <div className={`w-1.5 h-1.5 rounded-full ${project.status === 'Active' ? 'bg-tertiary-fixed-dim' : 'bg-slate-300'}`}></div>
                   {project.status === 'Active' ? 'READY' : project.status.toUpperCase()}
                 </div>
